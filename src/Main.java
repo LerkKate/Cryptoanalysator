@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
         Scanner console = new Scanner(System.in);
-
+        // комментарий
         while (true) {
             System.out.println("Укажите,что Вы хотите сделать: 1-Шифровать , 2-Дешифровать , 3-Взломать , 4- выход ? ");
             int action = console.nextInt();
