@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,17 +10,26 @@ import java.util.Scanner;
 
 public class BruteForce {
     public static void decryptByBruteForce(Path encryptfilePathWrite, char[] alphabet) throws IOException {
-        Path path = Paths.get("C:\\Programmist\\JavaRush\\new proekt\\ideal.txt");
-        List<String> reference = Files.readAllLines(path);
+        Scanner console = new Scanner(System.in);
+        System.out.println("Введите путь эталонного зашифрованного файла для сравнения");
+        String etalon = console.nextLine();
+        while (!Validator.isFileExists(etalon)) {
+            System.out.println("Файла не существует. Укажите корректный путь: ");
+            etalon = console.nextLine();
+        }
+        Path pathEtalon = Paths.get(etalon);
+        List<String> reference = Files.readAllLines(pathEtalon);
         int bestKey = 0;
         int maxSovpad = 0;
         List<String> bestList = new ArrayList<>();
 
         //файл для записи расшифрованного брутом текста
-        Path filePathWrite = Paths.get("C:\\Programmist\\JavaRush\\new proekt\\ByBrutForce.txt");
+        System.out.println("Введите путь для записи дешифрованного текста");
+        String textfinal = console.nextLine();
+        Path filePathWrite = Paths.get(textfinal);
         for (int i = 0; i < alphabet.length; i++) {
             int countSovpad = 0;
-            System.out.println("Пробую ключ " + i);
+            //System.out.println("Пробую ключ " + i);
             //получение списка расшифрованных строк по ключу i
             List<String> encryptedText = FileManager.readFile(encryptfilePathWrite.toString());
             List<String> decryptedList = new ArrayList<>();
@@ -38,11 +49,12 @@ public class BruteForce {
                     }
                 }
             }
-            if (countSovpad > 0) {
-                System.out.println("С ключом <%s> найдено %s совпадений с эталоном".formatted(i, countSovpad));
-            } else {
-                System.out.println("С ключом %s совпадений с эталоном не найдено".formatted(i));
-            }
+            //раскомментируем,если хотим видеть кол-во совпадений с каждым ключом
+//            if (countSovpad > 0) {
+//                System.out.println("С ключом <%s> найдено %s совпадений с эталоном".formatted(i, countSovpad));
+//            } else {
+//                System.out.println("С ключом %s совпадений с эталоном не найдено".formatted(i));
+//            }
             if (maxSovpad < countSovpad) {
                 maxSovpad = countSovpad;
                 bestKey = i;

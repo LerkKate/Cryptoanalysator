@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -10,8 +9,6 @@ public class FileManager {
     public static List<String> readFile(String filePath) throws IOException {
         Path path = Paths.get(filePath);
         List<String> list = Files.readAllLines(path);
-        //char[] chars = list.toString().toCharArray();
-        //System.out.println(list);
         return list;
 
     }

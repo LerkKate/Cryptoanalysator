@@ -33,7 +33,8 @@ public class Cipher {
             tmpText = Character.toString(chars[i]);
             finalText += tmpText;
         }
-        System.out.println(finalText);
+        //System.out.println(finalText);
+
         return finalText;
     }
 
